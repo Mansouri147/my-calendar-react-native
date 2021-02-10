@@ -4,7 +4,6 @@ import {SectionList, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import XDate from 'xdate';
 import moment from 'moment';
-import dateutils from '../dateutils';
 import styleConstructor from './style';
 import asCalendarConsumer from './asCalendarConsumer';
 
@@ -160,8 +159,8 @@ class AgendaList extends Component {
 
     if (markToday) {
       const todayString = XDate.locales[XDate.defaultLocale].today || commons.todayString;
-      const isToday = dateutils.sameDate(XDate(), XDate(title));
-      sectionTitle = isToday ? `${todayString}, ${sectionTitle}` : sectionTitle;
+      const today = XDate().toString("yyyy-MM-d");
+      sectionTitle = title === today ? `${todayString}, ${sectionTitle}` : sectionTitle;
     }
 
     return (

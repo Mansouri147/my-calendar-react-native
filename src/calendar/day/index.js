@@ -10,20 +10,20 @@ import PeriodDay from './period';
 
 
 const basicDayProps = _.omit(BasicDay.propTypes, 'date');
+console.log(basicDayProps)
 
 export default class Day extends Component {
   static displayName = 'IGNORE';
-
   static propTypes = {
     ...basicDayProps,
     /** The day to render */
     day: PropTypes.object,
     /** Provide custom day rendering component */
-    dayComponent: PropTypes.any
+    dayComponent: PropTypes.any,
   };
 
   shouldComponentUpdate(nextProps) {
-    return shouldUpdate(this.props, nextProps, ['day', 'dayComponent', 'markingType', 'marking', 'onPress', 'onLongPress']);
+    return shouldUpdate(this.props, nextProps, ['day','props', 'dayComponent', 'markingType', 'marking', 'onPress', 'onLongPress']);
   }
 
   getMarkingLabel() {
@@ -83,10 +83,9 @@ export default class Day extends Component {
     const date = xdateToData(day);
     const Component = this.getDayComponent();
     const dayProps = extractComponentProps(Component, this.props);
-
     return (
       <Component
-          {...dayProps}
+          {...this.props}
           date={date}
           testID={`${SELECT_DATE_SLOT}-${date.dateString}`}
           accessibilityLabel={this.getAccessibilityLabel(day)}

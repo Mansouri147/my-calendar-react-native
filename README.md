@@ -458,5 +458,3 @@ An advanced `Agenda` component that can display interactive listings for calenda
   style={{}}
 />
 ```
-
-
