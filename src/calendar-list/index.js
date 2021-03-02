@@ -237,12 +237,14 @@ class CalendarList extends Component {
       }
     }
 
-    _.invoke(this.props, 'onVisibleMonthsChange', visibleMonths);
-
-    this.setState({
-      rows: newrows,
-      currentMonth: parseDate(visibleMonths[0])
-    });
+    if(visibleMonths.length >0){
+        _.invoke(this.props, 'onVisibleMonthsChange', visibleMonths);
+    
+      this.setState({
+        rows: newrows,
+        currentMonth: parseDate(visibleMonths[0])
+      })
+    }
   };
 
   renderItem = ({item}) => {

@@ -1,4 +1,7 @@
-# MY Calendar React Native 
+# React Native Calendars 🗓️ 📆
+[![Version](https://img.shields.io/npm/v/react-native-calendars.svg)](https://www.npmjs.com/package/react-native-calendars)
+[![Build Status](https://travis-ci.org/wix/react-native-calendars.svg?branch=master)](https://travis-ci.org/wix/react-native-calendars)
+
 This module includes various customizable **React-Native** calendar components.
 
 The package is both **Android** and **iOS** compatible.
@@ -8,22 +11,26 @@ The package is both **Android** and **iOS** compatible.
 You can run example module by performing these steps:
 
 ```
-$ git clone https://github.com/Mansouri147/my-calendar-react-native.git
+$ git clone git@github.com:wix/react-native-calendars.git
 $ npm install
 $ react-native run-ios
 ```
 
+You can check example screens source code in [example module screens](https://github.com/wix-private/wix-react-native-calendar/tree/master/example/src/screens)
+
+This project is compatible with Expo/CRNA (without ejecting), and the examples have been [published on Expo](https://expo.io/@community/react-native-calendars-example)
+
 ## Installation
 
 ```
-$ npm install --save my-calendar-react-native
+$ npm install --save react-native-calendars
 ```
 
 The solution is implemented in JavaScript so no native module linking is required.
 
 ## Usage
 
-`import {`[Calendar](#calendar), [CalendarList](#calendarlist), [Agenda](#agenda)`} from 'my-calendar-react-native';`
+`import {`[Calendar](#calendar), [CalendarList](#calendarlist), [Agenda](#agenda)`} from 'react-native-calendars';`
 
 All parameters for components are optional. By default the month of current local date will be displayed.
 
@@ -57,6 +64,10 @@ LocaleConfig.defaultLocale = 'fr';
 ```
 
 ### Calendar
+
+<kbd>
+  <img src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/calendar.gif?raw=true">
+</kbd>
 
 #### Basic parameters
 
@@ -114,6 +125,11 @@ LocaleConfig.defaultLocale = 'fr';
 
 Dot marking
 
+<kbd>
+  <img height=50 src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/marking1.png?raw=true">
+</kbd>
+<p></p>
+
 ```javascript
 <Calendar
   // Collection of dates that have to be marked. Default = {}
@@ -130,6 +146,10 @@ You can customize a dot color for each day independently.
 
 Multi-Dot marking
 
+<kbd>
+ <img height=50 src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/marking4.png?raw=true">
+</kbd>
+<p></p>
 
 Use `markingType={'multi-dot'}` if you want to display more than one dot. Both the `<Calendar/>` and `<CalendarList/>` support multiple dots by using `dots` array in `markedDates` prop. 
 The property `color` is mandatory while `key` and `selectedColor` are optional. If key is omitted then the array index is used as key. If `selectedColor` is omitted then `color` will be used for selected dates.
@@ -150,6 +170,14 @@ const workout = {key:'workout', color: 'green'};
 
 Period marking
 
+<kbd>
+  <img height=50 src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/marking2.png?raw=true">
+</kbd>
+
+<kbd>
+  <img height=50 src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/marking3.png?raw=true">
+</kbd>
+<p></p>
 
 ```javascript
 <Calendar
@@ -166,6 +194,11 @@ Period marking
 ```
 
 Multi-period marking
+
+<kbd>
+  <img height=50 src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/marking6.png?raw=true">
+</kbd>
+<p></p>
 
 **CAUTION**: This marking is only fully supported by the `<Calendar/>` component because it expands its height. Usage with `<CalendarList/>` might lead to overflow issues.
 
@@ -194,6 +227,10 @@ Multi-period marking
 
 Custom marking allows you to customize each marker with custom styles.
 
+<kbd>
+  <img height=50 src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/custom.png?raw=true">
+</kbd>
+<p></p>
 
 ```javascript
 <Calendar
@@ -241,10 +278,19 @@ Custom marking allows you to customize each marker with custom styles.
   }}
 />
 ```
+<kbd>
+  <img height=350 src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/multi-marking.png?raw=true">
+</kbd>
+<p></p>
 
 Keep in mind that different marking types are not compatible. You can use just one marking style for a calendar.
 
 #### Displaying data loading indicator
+
+<kbd>
+  <img height=50 src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/loader.png?raw=true">
+</kbd>
+<p></p>
 
 The loading indicator next to the month name will be displayed if `<Calendar/>` has `displayLoadingIndicator` prop and the `markedDates` collection does not have a value for every day of the month in question. When you load data for days, just set `[]` or special marking value to all days in `markedDates` collection.
 
@@ -304,6 +350,12 @@ The loading indicator next to the month name will be displayed if `<Calendar/>` 
 
 If you want to have complete control over the calendar styles you can do it by overriding default `style.js` files. For example, if you want to override `<CalendarHeader/>` style first you have to find stylesheet id for this file:
 
+https://github.com/wix/react-native-calendars/blob/master/src/calendar/header/style.js#L4
+
+In this case it is `stylesheet.calendar.header`. Next you can add overriding stylesheet to your theme with this id.
+
+https://github.com/wix/react-native-calendars/blob/master/example/src/screens/calendars.js#L56
+
 ```javascript
 theme={{
   arrowColor: 'white',
@@ -350,6 +402,11 @@ If you implement an awesome day component please make a PR so that other people 
 
 ### CalendarList
 
+<kbd>
+  <img src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/calendar-list.gif?raw=true">
+</kbd>
+<p></p>
+
 `<CalendarList/>` is scrollable semi-infinite calendar composed of `<Calendar/>` components. Currently it is possible to scroll 4 years back and 4 years to the future. All parameters that are available for `<Calendar/>` are also available for this component. There are also some additional params that can be used:
 
 ```javascript
@@ -370,6 +427,11 @@ If you implement an awesome day component please make a PR so that other people 
 
 #### Horizontal CalendarList
 
+<kbd>
+  <img src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/horizontal-calendar-list.gif?raw=true">
+</kbd>
+<p></p>
+
 You can also make the `CalendarList` scroll horizontally. To do that you need to pass specific props to the `CalendarList`:
 
 ```javascript
@@ -386,6 +448,10 @@ You can also make the `CalendarList` scroll horizontally. To do that you need to
 ```
 
 ### Agenda
+<kbd>
+  <img src="https://github.com/wix-private/wix-react-native-calendar/blob/master/demo/agenda.gif?raw=true">
+</kbd>
+<p></p>
 
 An advanced `Agenda` component that can display interactive listings for calendar day items.
 
@@ -458,3 +524,16 @@ An advanced `Agenda` component that can display interactive listings for calenda
   style={{}}
 />
 ```
+
+## Authors
+
+* [Tautvilas Mecinskas](https://github.com/tautvilas/) - Initial code - [@tautvilas](https://twitter.com/Tautvilas)
+* Katrin Zotchev - Initial design - [@katrin_zot](https://twitter.com/katrin_zot)
+
+See also the list of [contributors](https://github.com/wix/react-native-calendar-components/contributors) who participated in this project.
+
+## Contributing
+
+Pull requests are most welcome! 
+Please `npm run test` and `npm run lint` before push.
+Don't forget to add a **title** and a **description** that explain the issue you're trying to solve and your suggested solution. Screenshots and gifs are very helpful.
